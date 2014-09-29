@@ -1,0 +1,114 @@
+//--------------------------------------
+// Created: 29-11-2013
+// Created by: Nicolaj Lund Nielsen
+// Modifiers:
+//--------------------------------------
+
+// Font Setup
+@import "less/_font";
+
+// Core variables and mixins
+@import "less/_variables";
+@import "less/_mixins";
+
+// Normalize
+@import "less/_normalize";
+
+/* ==============
+    GENEREL ELEMENTS
+   ============== */
+
+body {
+	margin: 0;
+	padding: 0;
+    color: @text-color;
+	overflow-y: scroll;
+	font: 16px Arial, Helvetica, sans-serif;
+	background: @body-bg;
+	line-height: 1.4;
+}
+
+::-moz-selection {
+	background: #faad17;
+	color: #333132;
+	text-shadow: none;
+}
+
+::selection {
+	background: #faad17;
+	color: #333132;
+	text-shadow: none;
+}
+
+h1 {
+	margin: 0 0 20px;
+}
+
+label {
+	position: relative;
+	overflow: hidden;
+}
+label > span {
+	position: absolute;
+	top: -100%;
+	left: -100%;
+}
+
+input, textarea:focus, input:focus {
+	outline: 0;
+	border: 0;
+}
+
+input[type="text"] {
+	width: 60%;
+	padding: 10px 15px;
+	.border-radius(4px);
+}
+
+input[type="submit"] {
+	padding: 10px 15px;
+	.border-radius(4px);
+	background-color: #060;
+	color: #eee;
+
+	&.disabled {
+		background-color: #ccc;
+	}
+}
+
+img {
+	max-width:100%;
+	height:auto;
+}
+
+/* ==============
+    DIS/PLAY CSS
+   ============== */
+
+.site-wrapper {
+	width: 100%;
+	max-width: 700px;
+	overflow: hidden;
+	position: absolute;
+	top: 3em;
+	left: 50%;
+	-webkit-transform: translate(-50%, 0);
+	-moz-transform: translate(-50%, 0);
+	-ms-transform: translate(-50%, 0);
+	-o-transform: translate(-50%, 0);
+	transform: translate(-50%, 0);
+	transition: all 600ms ease;
+	&.waiting {
+		top: 50%;
+	}
+	background-color: lightblue;
+}
+
+.site-content {
+	padding: 20px;
+	text-align: center;
+}
+
+
+// Helper classes
+@import "less/_helpers";
