@@ -39,42 +39,16 @@ body {
 	color: #333132;
 	text-shadow: none;
 }
+.visuallyhidden { 
+	position: absolute; 
+	overflow: hidden; 
+	clip: rect(0 0 0 0); 
+	height: 1px; width: 1px; 
+	margin: -1px; padding: 0; border: 0; 
+}
 
 h1 {
 	margin: 0 0 20px;
-}
-
-label {
-	position: relative;
-	display: inline-block;
-	width: 80%;
-}
-label > span {
-	position: absolute;
-	top: -100%;
-	left: -100%;
-}
-
-input, textarea:focus, input:focus {
-	outline: 0;
-	border: 0;
-}
-
-input[type="text"] {
-	width: 100%;
-	padding: 10px 15px;
-	.border-radius(4px);
-}
-
-input[type="submit"] {
-	padding: 10px 15px;
-	.border-radius(4px);
-	background-color: #060;
-	color: #eee;
-
-	&.disabled {
-		background-color: #ccc;
-	}
 }
 
 img {
@@ -109,6 +83,58 @@ img {
 	text-align: center;
 }
 
+label {
+	position: relative;
+	display: inline-block;
+	width: 80%;
+}
+label:after {
+	content: "\23CE";
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	bottom: 6px;
+	left: auto;
+	display: inline-block;
+	margin: 0;
+	padding: 3px 4px;
+	text-transform: uppercase;
+	color: #ccc;
+	border: 1px solid #ddd;
+}
+.ready label:after {
+	color: #999;
+	border: 1px solid #aaa;
+	box-shadow: 1px 1px 3px 0px #999;
+}
+label > span {
+	position: absolute;
+	top: -100%;
+	left: -100%;
+}
+
+input, textarea:focus, input:focus {
+	outline: 0;
+	border: 0;
+}
+
+input[type="text"] {
+	width: 100%;
+	padding: 10px 15px;
+	//.border-radius(4px);
+}
+
+input[type="submit"] {
+	padding: 10px 15px;
+	.border-radius(4px);
+	background-color: #060;
+	color: #eee;
+
+	&.disabled {
+		background-color: #ccc;
+	}
+}
+
 .suggestions {
 	position: absolute;
 	left: 0;
@@ -117,6 +143,7 @@ img {
 	width: 100%;
 	background-color: white;
 	border: 1px solid lightgrey;
+	box-shadow: 1px 1px 3px 0px #ddd;
 
 	&.is-hidden {
 		display: none;
@@ -128,11 +155,19 @@ img {
 }
 .suggestions__listitem {
 	display: block;
-	margin: 5px 0 0 0;
-	padding: 5px 5px 5px 15px;
+	margin: 0;
+	padding: 10px 5px 10px 15px;
 	list-style: none;
 	text-align: left;
 	font-size: 14px;
+
+	&.is-active {
+		background-color: #d5d5d5;
+	}
+}
+.suggestions__listlink {
+	text-decoration: none;
+	color: #333;
 }
 
 

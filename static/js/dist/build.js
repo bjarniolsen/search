@@ -14,7 +14,9 @@ jQuery(function ($) {
             options.root = $(".site-wrapper");
             options.suggestionsWrapper = options.root.find(".suggestions");
             options.suggestionsList = options.suggestionsWrapper.find(".suggestions__list");
+            options.form = options.root.find('form');
             options.input = options.root.find('input[type="text"]');
+            options.chosen = "";
             //options.submit = options.root.find('input[type="submit"]');
 			// disable submit button until we have some input text
 			//Engine.ui.button.disable(options.submit);
@@ -28,19 +30,27 @@ jQuery(function ($) {
 				}
             });
 
+			// validate form on submit
+			options.form.bind("submit", function() {
+				console.log("submit, NOT!", options.input.val());
+				return false;
+			});
+
 			// bind some events to our INPUT field
 			options.input
 				.bind("focus", function() {
 					Engine.handleInputEvent.focus(options)
 				}).bind("blur", function() {
-					//Engine.handleInputEvent.blur(options)
+					Engine.handleInputEvent.blur(options)
 				}).bind("keyup", function() {
 					Engine.handleInputEvent.keyup(options)
+				}).bind("keydown", function() {
+					Engine.handleInputEvent.keydown(options)
 				});
         },
         ui: {
-        	build: {
-        		dropdown: function(options, suggestions) {
+        	dropdown: {
+        		build: function(options, suggestions) {
 					var listitems = [];
 					options.suggestionsList.empty();
 					if (!suggestions.length) {
@@ -68,7 +78,7 @@ jQuery(function ($) {
         	autosuggest: function(options, suggestions) {
         		// do something with suggestions here
         		// and send them to the UI
-        		Engine.ui.build.dropdown(options, suggestions);
+        		Engine.ui.dropdown.build(options, suggestions);
         	},
         	requestSuggestions: function(options, suggestion) {
 				var suggestions = [];
@@ -91,25 +101,25 @@ jQuery(function ($) {
 				options.root.removeClass("waiting");
         	},
         	blur: function(options) {
-				//
+				options.root.removeClass("ready");
         	},
         	keyup: function(options) {
 				var iKeyCode = event.keyCode,
 					value = "";
 
 				// iKeyCode 8 = backspace
-				// We need this to keep searching when deleting charactors 
-				if ((iKeyCode < 32 && iKeyCode != 8) || (iKeyCode >= 33 && iKeyCode <= 46) || (iKeyCode >= 112 && iKeyCode <= 123)) {
+				// iKeyCode 46 = delete
+				// We need these to keep searching when deleting charactors 
+				if ((iKeyCode < 32 && iKeyCode != 8) || (iKeyCode >= 33 && iKeyCode <= 45) || (iKeyCode >= 112 && iKeyCode <= 123)) {
 					//ignore
-					console.log("Tast: ", iKeyCode);
-				} else if (iKeyCode == 40) { // Down
-					Engine.ui.dropdown.selectSuggestion.down();
-				} else if (iKeyCode == 38) { // Up
-					Engine.ui.dropdown.selectSuggestion.down();
+					//console.log("Tast: ", iKeyCode);
 				} else {
+					// reset chosen value so we step down the suggestions from top
+					options.chosen = "";
 					value = options.input.val();
 					if (value.length > 0) {
 						//$(document).trigger("can.search", true);
+						options.root.addClass("ready");
 						options.suggestionsWrapper.removeClass("is-hidden");
 					} else {
 						options.suggestionsWrapper.addClass("is-hidden");
@@ -117,7 +127,36 @@ jQuery(function ($) {
 					}
 					Engine.autoSuggestControl.requestSuggestions(options, value);
 				}
-        	}
+        	},
+			keydown: function(options) {
+				var iKeyCode = event.keyCode,
+					value = options.input.val();
+
+				if (value.length > 0) {
+					if (iKeyCode == 40 || iKeyCode == 38) {
+
+						var listitems = options.suggestionsList.find(".suggestions__listitem").removeClass("is-active");
+
+						if (iKeyCode == 40) { // Down
+							if (options.chosen === "") {
+								options.chosen = 0;
+							} else if ( (options.chosen+1) < listitems.length ) {
+								options.chosen++;
+							}
+						} else if (iKeyCode == 38) { // Up
+							if (options.chosen === "") {
+								options.chosen = 0;
+							} else if ( options.chosen > 0 ) {
+								options.chosen--;
+							}
+						}
+
+						$(listitems[options.chosen]).addClass("is-active");
+						var result = $(listitems[options.chosen]).text();
+						options.input.val(result);
+					}
+				}
+			}
         },
         dummyArray: [
 			"Alabama", "Alaska", "Arizona", "Arkansas",
