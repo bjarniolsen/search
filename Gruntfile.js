@@ -37,7 +37,7 @@ module.exports = function(grunt) {
 			scripts: {
     			files: ['static/js/*.js'],
     			tasks: ['concat', 'uglify']
-			} 
+			}
 		}
 	});
 

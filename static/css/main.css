@@ -242,7 +242,8 @@ h1 {
 }
 label {
   position: relative;
-  overflow: hidden;
+  display: inline-block;
+  width: 80%;
 }
 label > span {
   position: absolute;
@@ -256,7 +257,7 @@ input:focus {
   border: 0;
 }
 input[type="text"] {
-  width: 60%;
+  width: 100%;
   padding: 10px 15px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -287,7 +288,6 @@ img {
 .site-wrapper {
   width: 100%;
   max-width: 700px;
-  overflow: hidden;
   position: absolute;
   top: 3em;
   left: 50%;
@@ -305,6 +305,30 @@ img {
 .site-content {
   padding: 20px;
   text-align: center;
+}
+.suggestions {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  display: block;
+  width: 100%;
+  background-color: white;
+  border: 1px solid lightgrey;
+}
+.suggestions.is-hidden {
+  display: none;
+}
+.suggestions__list {
+  margin: 0;
+  padding: 0;
+}
+.suggestions__listitem {
+  display: block;
+  margin: 5px 0 0 0;
+  padding: 5px 5px 5px 15px;
+  list-style: none;
+  text-align: left;
+  font-size: 14px;
 }
 /* ==============
     Helpers
