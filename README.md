@@ -26,12 +26,16 @@ To use Gulp you need Node JS
 [Install Node.js](http://nodejs.org "Node JS website")
 
 Then run this in your favorite commandline tool:
-`c:\path\to\project\root\folder> npm install`
+```
+c:\path\to\project\root\folder> npm install
+```
 
 And wait for Nodejs package manager (npm) to install all dependent modules (package.json)
 
 Then run this:
-`c:\path\to\project\root\folder\ > gulp`
+```
+c:\path\to\project\root\folder\ > gulp
+```
 
 Gulp 'watches' file changes and builds Less and JS.
 
