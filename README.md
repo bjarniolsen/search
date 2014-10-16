@@ -41,14 +41,14 @@ Gulp 'watches' file changes and builds Less and JS.
 
 ### CSS
 (Sass / Less)
-Less is located in /static/less/ and Gulp builds it to /static/dist/
+Less is located in `/static/less/` and Gulp builds it to `/static/dist/`
 CSS is Minified.
 
 Remember to describe any Less/Sass specific structures and wizardry that is not obvious.
 
 ### Javascript
 (jQuery / Other)
-JS is located in /static/js/ and Gulp builds it to /static/dist/js/
+JS is located in `/static/js/` and Gulp builds it to `/static/dist/js/`
 JS is Uglify'ed.
 API references
 
@@ -59,7 +59,7 @@ API references
 [More documentation](https://url/to/more/dokumentation/ "Full blown documenation")
 
 ### Installation
-Download these files from /hest and /abe
+Download these files from `/hest` and `/abe`
 
 ### Branches structure
 `prod-branch` and `release` branches.
