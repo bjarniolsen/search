@@ -1,9 +1,3 @@
-﻿/* DIS/PLAY Script 
-    Author's name: Nicolaj Lund Nielsen
-    Modified by:
-    Client name: DIS/PLAY
-    Date of creation: 2/7 - 2013
-*/
 jQuery.noConflict();
 jQuery(function ($) {
     Engine = {
